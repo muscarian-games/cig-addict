@@ -1,0 +1,211 @@
+title CIG ADDICT
+author Muscarian Games
+homepage www.muscarian.com
+background_color DARKRED
+color_palette mastersystem
+again_interval 0.5
+verbose_logging
+
+========
+OBJECTS
+========
+
+Background 
+lightbrown
+
+Target 
+lightblue red gray
+21112
+20002
+20002
+20002
+20002
+
+Wall 
+black
+
+Player 
+BLUE GRAY orange BLACK
+..3..
+.020.
+21112
+.111.
+.0.0.
+
+CaughtPlayer 
+BLUE GRAY orange BLACK
+..3..
+20202
+.111.
+.111.
+0...0
+
+Cig
+DARKRED ORANGE lightgray
+..0..
+..2..
+..2..
+..1..
+..1..
+
+Manager
+GREEN RED white gray
+..3..
+.020.
+21112
+.111.
+.0.0.
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+i = Cig
+O = Target
+M = Manager
+
+
+Obstacle = Wall
+
+=======
+SOUNDS
+=======
+
+player move 63131907
+player cantmove 58139902
+SFX0 39149304 (caught by manager)
+cig destroy 49184503 (pick up cig)
+endlevel 28748705 (exit)
+restart 83334708
+endgame 61542908
+manager move 28115902
+manager cantmove 62339504
+titlescreen 38030108
+undo 69618105
+closemessage 19668306
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Target, Manager
+Player, Wall, CaughtPlayer
+Cig
+
+
+======
+RULES     
+======     
+
+(player picks up cig on overlap)
+late [ Player Cig ] -> [ Player ] 
+
+(manager follows player)
+[ Manager | ... | Player ] -> [ > Manager | ... | Player ] 
+
+[ > Manager | wall ] -> [ stationary Manager | wall ]
+
+(player is caught)
+
+late [ Manager Player ] -> [ CaughtPlayer ] SFX0 MESSAGE "CAUGHT YOU, CIG THIEF!"
+
+[ > Manager | < Player ] -> [ Manager | CaughtPlayer ] SFX0 MESSAGE "CAUGHT YOU, CIG THIEF!"
+
+
+==============
+WINCONDITIONS
+==============
+
+No Cig
+No CaughtPlayer
+All player on target
+
+=======     
+LEVELS
+=======
+
+#########
+#...M...#
+#..#.#.i#
+#.P#.#..#
+#..#.#..#
+O.......#
+#########
+
+#########
+#.M.i..i#
+#..#.#..#
+#.P.i..i#
+#..#.#..#
+#.......#
+####O####
+
+#######O#
+#M..i...#
+#..#.#..#
+#...i...#
+#..#.#..#
+#P..i..M#
+#########
+
+#######O#
+#P.....M#
+#..#i#..#
+#..#i#..#
+#..#i#..#
+#...M...#
+#########
+
+#O#######
+#M......#
+#.#...#.#
+#.i#P#i.#
+#.i#.#i.#
+#......M#
+#########
+
+#########
+#.#.M.#.O
+#.#.P.#.#
+#.i...iM#
+#.##.##.#
+#...i...#
+#########
+
+####O####
+#.i...iM#
+#.#.M.#.#
+#.i.i.i.#
+#.#####.#
+#...P...#
+#########
+
+#########
+#.i.M.i.#
+#.#.#.#.#
+#.i.#.iM#
+#.#.#.#.#
+#...P..i#
+#O#######
+
+#########
+#.#.M.#.#
+#..#.#..O
+#.i.P.i.#
+#..#.#..#
+#i..M...#
+#########
+
+#O#######
+#P#.Mi..#
+#.#..#..#
+#.....Mi#
+#.#..#..#
+#.#.Mi..#
+#########
+
+
